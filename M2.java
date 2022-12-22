@@ -7,10 +7,15 @@ package inf3n21pj;
 
 import java.util.Scanner;
 
-
+/**
+ *
+ * @author 182120013
+ */
 public class M2 {
 
-   
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         Scanner leia = new Scanner(System.in);
         int n ;
@@ -36,12 +41,12 @@ public class M2 {
             System.out.println("\nO aluno está reprovado?!?");
         }
 
-    }
+    }//fim da Varzea
 
     public static boolean validaNota(float nota) {
 
         return nota < 0 || nota > 10;
-    }
+    }//fim do valida nota
 
     public static float leiaFloat() {
         try{
@@ -52,11 +57,11 @@ public class M2 {
             System.out.println("Corrija o valor inserido: ");
             return leiaFloat();
         }
-    }
+    }//fim do leia float
 
     private static int leiaInt() {
         Scanner leia = new Scanner(System.in); 
-        return leia.nextInt();}
+        return leia.nextInt();}//To change body of generated methods, choose Tools | Templates.
     }
 
    

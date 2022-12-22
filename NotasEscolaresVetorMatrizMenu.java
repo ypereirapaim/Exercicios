@@ -3,36 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inf3n21pj;
+package inf3n212pj;
 
 import java.util.Scanner;
 
 /**
  *
- * @author 181810146
+ * @author jbferraz
  */
 public class NotasEscolaresVetorMatrizMenu {
-//declaração global
 
+    //declaração global
     static Scanner leia = new Scanner(System.in);
     static String alunos[];
     static float notas[][];
     static int nAlunos, nNotas, contAlunos;
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        System.out.println(".:Sistema de Notas:.");
-        System.out.print("Informe o núm. de alunos:");
+        // TODO code application logic here
+        System.out.println(".: Sistema de Notas :.");
+        System.out.print("Informe o núm. de alunos: ");
         nAlunos = (int) leiaFloat();
-        System.out.println("Quantas notas por alunos:");
-        nAlunos = (int) leiaFloat();//inicializar vetor e matriz de notas
+        System.out.print("Quantas notas por aluno: ");
+        nNotas = (int) leiaFloat();
+
+        //inicialiar vetor e matriz de aluno e notas
         alunos = new String[nAlunos];
-        notas = new float[nAlunos][nNotas + 1];//inicializou vetor
+        notas = new float[nAlunos][nNotas + 1];
+
         int opM;
         do {
             menu();
-
             opM = (int) leiaFloat();
-            switch (opM) {
+            switch (opM) {//escolha do portugol
                 case 1:
                     inserirAlunoNotas();
                     break;
@@ -40,24 +46,21 @@ public class NotasEscolaresVetorMatrizMenu {
                     imprimirAlunosNotas();
                     break;
                 case 0:
-                     System.out.println("Aplicação encerrada pelo usuário!");
+                    System.out.println("Aplicação encerrada pelo usuário!");
                     break;
                 default:
-                     System.out.println("Opção inválida, tente novamente!");
+                    System.out.println("Opção inválida, tente novamente!");
                     break;
             }//fim switch
-
         } while (opM != 0);
 
     }//fim main
 
     public static void menu() {
-
-        System.out.println("Inserir Alunos e notas");
+        System.out.println("1 - Inserir Alunos e notas");
         System.out.println("2 - Imprimir Alunos e notas");
         System.out.println("0 - Sair");
-        System.out.println("Digite aqui:");
-
+        System.out.print("Digite aqui: ");
     }
 
     public static float leiaFloat() {
@@ -65,22 +68,37 @@ public class NotasEscolaresVetorMatrizMenu {
             Scanner leia = new Scanner(System.in);
             return leia.nextFloat();
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "Erro: ");
-            System.out.println("Corrija o valor inserido: ");
+            System.out.print("Tente novamente: ");
             return leiaFloat();
+        }
+    }//fim do leiaFloat
+
+    private static void inserirAlunoNotas() {
+        if (contAlunos < nAlunos) {
+            System.out.print("Informe o nome do aluno: ");
+            alunos[contAlunos] = leia.next();
+            for (int i = 0; i < nNotas; i++) {
+                System.out.print("Informe a " + (i + 1) + "ª nota: ");
+                notas[contAlunos][i] = leiaFloat();
+                notas[contAlunos][nNotas] += notas[contAlunos][i];
+            }//fim for
+            notas[contAlunos][nNotas] = notas[contAlunos][nNotas] / nNotas;
+            contAlunos++;
+        } else {
+            System.out.println("Não é possível mais digitar alunos."
+                    + "\nNúm. máximo de posições obtidos.");
         }
     }
 
-    private static void inserirAlunoNotas() {
-    if(contAlunos < nAlunos){
-        contAlunos++;
-    
-    }else{
-     System.out.println("Não é possivel mais digitar alunos." + "\nNúm. Máximo de posições obtidas.");
-    }    
+    private static void imprimirAlunosNotas() {
+        for (int i = 0; i < contAlunos; i++) {
+            System.out.printf(alunos[i] + " sua média foi de %.2f", notas[i][nNotas]);
+            if (notas[i][nNotas] >= 7) {
+                System.out.println("\nVocê aprovou!");
+            }else{
+                System.out.println("\nVocê não aprovou!");
+            }
+        }
     }
 
-    private static void imprimirAlunosNotas() {
-        
-    }
 }
